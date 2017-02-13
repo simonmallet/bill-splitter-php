@@ -54,9 +54,7 @@ class BillSplitter
         }
 
         foreach($data as $name => $dataSheet) {
-            if ($dataSheet['balance'] > 0) {
-                
-            } else if ($dataSheet['balance'] < 0) {
+            if ($dataSheet['balance'] < 0) {
                 $this->getMoneyFrom($data, $name, $dataSheet['balance']);
             }
         }
@@ -71,9 +69,9 @@ class BillSplitter
                 if (abs($moneyRequired) > $dataSheet['balance']) {
                     $data[$name]['result'][] = ['giveTo' => $giveMoneyTo, 'amount' => $dataSheet['balance']];
                     $data[$giveMoneyTo]['result'][] = ['receiveFrom' => $name, 'amount' => $dataSheet['balance']];
+                    $data[$giveMoneyTo]['balance'] += $dataSheet['balance'];
                     $moneyRequired += $dataSheet['balance'];
                     $data[$name]['balance'] = 0;
-                    $data[$giveMoneyTo]['balance'] -= $moneyRequired;
                     return $this->getMoneyFrom($data, $giveMoneyTo, $moneyRequired);
                 } else {
                     $data[$name]['result'][] = ['giveTo' => $giveMoneyTo, 'amount' => abs($moneyRequired)];
