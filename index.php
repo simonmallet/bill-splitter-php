@@ -5,6 +5,7 @@ require_once __DIR__.'/vendor/autoload.php';
 use \lib\FileSystem\FileHandler;
 use \lib\FileSystem\CSVFileReader;
 use \lib\UseCase\BillSplitter;
+use \lib\UseCase\BillSplitter\HeaderExtractor;
 use \lib\Template\MoneyOweDisplay;
 
 $fileName = 'data/test2.txt';
@@ -15,8 +16,9 @@ if (!$fileHandle = $fileHandler->open($fileName)) {
 }
 
 $fileReader = new CSVFileReader($fileHandler);
+$headerExtractor = new HeaderExtractor($fileReader);
 
-$billSplitter = new BillSplitter($fileReader);
+$billSplitter = new BillSplitter($fileReader, $headerExtractor);
 $splitData = $billSplitter->splitMoneyEqually();
 
 $display = new MoneyOweDisplay();

@@ -3,6 +3,7 @@
 namespace lib\UseCase;
 
 use \lib\FileSystem\CSVFileReader;
+use \lib\UseCase\BillSplitter\HeaderExtractor;
 
 class BillSplitter
 {
@@ -10,15 +11,17 @@ class BillSplitter
     const COLUMN_SEPARATOR = ';';
     private $fileReader;
     private $totalPaidOverall = 0;
+    private $headerExtractor;
 
-    public function __construct(CSVFileReader $fileReader)
+    public function __construct(CSVFileReader $fileReader, HeaderExtractor $headerExtractor)
     {
         $this->fileReader = $fileReader;
+        $this->headerExtractor = $headerExtractor;
     }
 
     public function splitMoneyEqually()
     {
-        $data = $this->getHeaderInformation();
+        $data = $this->headerExtractor->getHeaderInformation();
         $this->calculateTotalPaidByEveryone($data);
         $this->calculateWhoPaysWhatToWho($data);
         return $data;
