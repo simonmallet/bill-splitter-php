@@ -6,6 +6,7 @@ use \lib\FileSystem\FileHandler;
 use \lib\FileSystem\CSVFileReader;
 use \lib\UseCase\BillSplitter;
 use \lib\UseCase\BillSplitter\HeaderExtractor;
+use \lib\UseCase\BillSplitter\Calculator;
 use \lib\Template\MoneyOweDisplay;
 
 $fileName = 'data/test2.txt';
@@ -17,8 +18,9 @@ if (!$fileHandle = $fileHandler->open($fileName)) {
 
 $fileReader = new CSVFileReader($fileHandler);
 $headerExtractor = new HeaderExtractor($fileReader);
+$calculator = new Calculator($fileReader);
 
-$billSplitter = new BillSplitter($fileReader, $headerExtractor);
+$billSplitter = new BillSplitter($fileReader, $headerExtractor, $calculator);
 $splitData = $billSplitter->splitMoneyEqually();
 
 $display = new MoneyOweDisplay();
