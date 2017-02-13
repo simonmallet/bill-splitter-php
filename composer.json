@@ -1,8 +1,13 @@
 {
     "name": "simonmallet/bill-splitter-php",
     "type": "project",
+    "autoload": {
+        "psr-4": {
+            "lib\\": "lib/"
+        }
+    },
     "require-dev": {
-        "phpunit/phpunit": "^6.0"
+        "phpunit/phpunit": "^5.7"
     },
     "authors": [
         {
