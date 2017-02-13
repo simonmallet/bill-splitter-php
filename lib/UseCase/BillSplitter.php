@@ -8,13 +8,22 @@ use \lib\UseCase\BillSplitter\Calculator;
 
 class BillSplitter
 {
-    const ROW_BUFFER = 1028;
-    const COLUMN_SEPARATOR = ';';
+    /** @var CSVFileReader */
     private $fileReader;
-    private $totalPaidOverall = 0;
+
+    /** @var HeaderExtractor */
     private $headerExtractor;
+
+    /** @var Calculator */
     private $calculator;
 
+    /**
+     * @param CSVFileReader $fileReader
+     * @param HeaderExtractor $headerExtractor
+     * @param Calculator @calculator
+     *
+     * @return BillSplitter
+     */
     public function __construct(CSVFileReader $fileReader, HeaderExtractor $headerExtractor, Calculator $calculator)
     {
         $this->fileReader = $fileReader;
@@ -22,6 +31,9 @@ class BillSplitter
         $this->calculator = $calculator;
     }
 
+    /**
+     * @return array
+     */
     public function splitMoneyEqually()
     {
         $data = $this->headerExtractor->getHeaderInformation();
