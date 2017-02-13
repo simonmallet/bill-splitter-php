@@ -4,9 +4,16 @@ namespace lib\FileSystem;
 
 class CSVFileReader
 {
-    public function read($handle, $length = 0, $delimiter = ',', $enclosure = '"', $escapeCharacter = "\\")
+    private $fileHandle;
+
+    public function __construct(FileHandler $fileHandle)
     {
-        return fgetcsv($handle, $length, $delimiter, $enclosure, $escapeCharacter);
+        $this->fileHandle = $fileHandle;
+    }
+
+    public function read($length = 0, $delimiter = ',', $enclosure = '"', $escapeCharacter = "\\")
+    {
+        return fgetcsv($this->fileHandle->getResource(), $length, $delimiter, $enclosure, $escapeCharacter);
     }
 }
 
