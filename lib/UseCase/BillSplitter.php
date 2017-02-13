@@ -9,6 +9,7 @@ class BillSplitter
     const ROW_BUFFER = 1028;
     const COLUMN_SEPARATOR = ';';
     private $fileReader;
+    private $totalPaidOverall = 0;
 
     public function __construct(CSVFileReader $fileReader)
     {
@@ -36,8 +37,9 @@ class BillSplitter
     {
         while ($row = $this->readLine()) {
             $position = 0;
-            foreach($data as $name => $paidAmount) {
+            foreach($data as $name => $dataSheet) {
                 $data[$name]['totalPaid'] += $row[$position];
+                $this->totalPaidOverall += $row[$position];
                 $position++;
             }
         }
@@ -45,6 +47,12 @@ class BillSplitter
 
     private function calculateWhoPaysWhatToWho(&$data)
     {
+        $averagePerPerson = $this->totalPaidOverall / count($data);
+
+        foreach($data as $name => $dataSheet) {
+            $data[$name]['owes'] = max($averagePerPerson - $data[$name]['totalPaid'], 0);
+        }
+
         
     }
 
