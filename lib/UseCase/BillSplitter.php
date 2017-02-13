@@ -27,15 +27,6 @@ class BillSplitter
         return $data;
     }
 
-    private function getHeaderInformation()
-    {
-        $row = $this->readLine();
-        foreach ($row as $key => $headerName) {
-            $headerNames[$headerName]['totalPaid'] = 0;
-        }
-        return $headerNames;
-    }
-
     private function calculateTotalPaidByEveryone(&$data)
     {
         while ($row = $this->readLine()) {
