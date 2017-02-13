@@ -4,13 +4,22 @@ namespace lib\FileSystem;
 
 class FileHandler
 {
+    /** @var \Resource */
     private $resource = null;
 
+    /**
+     * @param string $filename
+     * @param string $mode
+     * @return \Resource
+     */
     public function open($filename, $mode = 'r')
     {
         return $this->resource = @fopen($filename, $mode);
     }
 
+    /**
+     * @return void
+     */
     public function close()
     {
         if ($resource) {
@@ -18,6 +27,9 @@ class FileHandler
         }
     }
 
+    /**
+     * @return \Resource|void
+     */
     public function getResource()
     {
         if ($this->resource) {
@@ -25,6 +37,9 @@ class FileHandler
         }
     }
 
+    /**
+     * @return void
+     */
     function __destruct()
     {
         $this->close();

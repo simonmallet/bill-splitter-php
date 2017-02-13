@@ -4,6 +4,9 @@ namespace lib\UseCase\BillSplitter;
 
 class HeaderExtractor extends Base
 {
+    /**
+     * @return array
+     */
     public function getHeaderInformation()
     {
         $row = $this->readLine();

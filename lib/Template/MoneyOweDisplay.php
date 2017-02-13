@@ -4,6 +4,10 @@ namespace lib\Template;
 
 class MoneyOweDisplay
 {
+    /**
+     * @param array $data
+     * @return void
+     */
     public function display(array $data)
     {
         foreach ($data as $name => $dataSheet) {

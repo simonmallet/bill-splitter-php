@@ -22,7 +22,12 @@ class Calculator extends Base
         return $totalPaidOverall;
     }
 
-    public function calculateWhoPaysWhatToWho(&$data, $totalPaidOverall)
+    /**
+     * @param array $data
+     * @param int   $totalPaidOverall
+     * @return void
+     */
+    public function calculateWhoPaysWhatToWho(array &$data, $totalPaidOverall)
     {
         $averagePerPerson = $totalPaidOverall / count($data);
 
@@ -37,7 +42,13 @@ class Calculator extends Base
         }
     }
 
-    private function getMoneyFrom(&$data, $giveMoneyTo, $moneyRequired)
+    /**
+     * @param array $data
+     * @param string $giveMoneyTo
+     * @param int $moneyRequired
+     * @return int|null
+     */
+    private function getMoneyFrom(array &$data, $giveMoneyTo, $moneyRequired)
     {
         if ($moneyRequired >= 0) return;
 
