@@ -6,7 +6,7 @@ use \lib\FileSystem\FileHandler;
 use \lib\FileSystem\CSVFileReader;
 use \lib\UseCase\BillSplitter;
 
-$fileName = 'data/test1.txt';
+$fileName = 'data/test2.txt';
 $fileHandler = new FileHandler();
 
 if (!$fileHandle = $fileHandler->open($fileName)) {

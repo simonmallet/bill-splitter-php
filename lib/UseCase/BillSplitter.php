@@ -50,10 +50,40 @@ class BillSplitter
         $averagePerPerson = $this->totalPaidOverall / count($data);
 
         foreach($data as $name => $dataSheet) {
-            $data[$name]['owes'] = max($averagePerPerson - $data[$name]['totalPaid'], 0);
+            $data[$name]['balance'] = $averagePerPerson - $dataSheet['totalPaid'];
         }
 
-        
+        foreach($data as $name => $dataSheet) {
+            if ($dataSheet['balance'] > 0) {
+                
+            } else if ($dataSheet['balance'] < 0) {
+                $this->getMoneyFrom($data, $name, $dataSheet['balance']);
+            }
+        }
+    }
+
+    private function getMoneyFrom(&$data, $giveMoneyTo, $moneyRequired)
+    {
+        if ($moneyRequired >= 0) return;
+
+        foreach ($data as $name => $dataSheet) {
+            if ($dataSheet['balance'] > 0) {
+                if (abs($moneyRequired) > $dataSheet['balance']) {
+                    $data[$name]['result'][] = ['giveTo' => $giveMoneyTo, 'amount' => $dataSheet['balance']];
+                    $data[$giveMoneyTo]['result'][] = ['receiveFrom' => $name, 'amount' => $dataSheet['balance']];
+                    $moneyRequired += $dataSheet['balance'];
+                    $data[$name]['balance'] = 0;
+                    $data[$giveMoneyTo]['balance'] -= $moneyRequired;
+                    return $this->getMoneyFrom($data, $giveMoneyTo, $moneyRequired);
+                } else {
+                    $data[$name]['result'][] = ['giveTo' => $giveMoneyTo, 'amount' => abs($moneyRequired)];
+                    $data[$giveMoneyTo]['result'][] = ['receiveFrom' => $name, 'amount' => abs($moneyRequired)];
+                    $data[$name]['balance'] += $moneyRequired;
+                    $data[$giveMoneyTo]['balance'] -= $moneyRequired;
+                    return;
+                }
+            }
+        }
     }
 
     private function readLine()
