@@ -16,4 +16,6 @@ if (!$fileHandle = $fileHandler->open($fileName)) {
 $fileReader = new CSVFileReader($fileHandler);
 
 $billSplitter = new BillSplitter($fileReader);
-$billSplitter->doItAll();
+$splitData = $billSplitter->splitMoneyEqually();
+
+print_r($splitData);
