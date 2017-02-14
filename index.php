@@ -10,7 +10,7 @@ use \lib\UseCase\BillSplitter\Calculator;
 use \lib\UseCase\BillSplitter\DataValidator;
 use \lib\Template\MoneyOweDisplay;
 
-$fileName = 'data/test3-bad-data.txt';
+$fileName = 'data/test1.txt';
 $fileHandler = new FileHandler();
 $fileHandle = $fileHandler->open($fileName);
 
