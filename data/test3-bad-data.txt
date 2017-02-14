@@ -1,0 +1,9 @@
+caroline;simon;marika;yohan
+15;0;0;0
+
+
+
+abc;25;5;5
+0;0;50;0
+40;0;0;0
+

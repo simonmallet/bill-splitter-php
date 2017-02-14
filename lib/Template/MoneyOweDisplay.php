@@ -11,7 +11,7 @@ class MoneyOweDisplay
     public function display(array $data)
     {
         foreach ($data as $name => $dataSheet) {
-            echo '<b>'.$name.'</b><br>';
+            echo '<b>'.ucfirst($name).'</b><br>';
             echo 'Paid in total: ' . $dataSheet['totalPaid'] . '<br>';
             
             if (isset($dataSheet['result'])) {

@@ -9,7 +9,7 @@ use \lib\UseCase\BillSplitter\HeaderExtractor;
 use \lib\UseCase\BillSplitter\Calculator;
 use \lib\Template\MoneyOweDisplay;
 
-$fileName = 'data/test2.txt';
+$fileName = 'data/test3-bad-data.txt';
 $fileHandler = new FileHandler();
 
 if (!$fileHandle = $fileHandler->open($fileName)) {
