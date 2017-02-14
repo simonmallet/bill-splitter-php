@@ -35,4 +35,4 @@ try {
 }
 
 $display = new MoneyOweDisplay();
-$display->display($splitData);
+echo $display->display($splitData);

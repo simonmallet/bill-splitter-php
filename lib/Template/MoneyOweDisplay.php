@@ -10,22 +10,25 @@ class MoneyOweDisplay
      */
     public function display(array $data)
     {
+        $displayData = "";
+
         foreach ($data as $name => $dataSheet) {
-            echo '<b>'.ucfirst($name).'</b><br>';
-            echo 'Paid in total: ' . $dataSheet['totalPaid'] . '<br>';
+            $displayData .= '<b>'.ucfirst($name).'</b><br>';
+            $displayData .= 'Paid in total: ' . $dataSheet['totalPaid'] . '<br>';
             
             if (isset($dataSheet['result'])) {
                 foreach ($dataSheet['result'] as $result) {
                     foreach ($result as $giveOrReceive => $amount) {
-                        echo $giveOrReceive . ' ' . ucfirst($amount) . ' ';
+                        $displayData .= $giveOrReceive . ' ' . ucfirst($amount) . ' ';
                     }
-                    echo '<br>';
+                    $displayData .= '<br>';
                 }
             } else {
-                echo 'This person does not owe or receive any money.<br>';
+                $displayData .= 'This person does not owe or receive any money.<br>';
             }
-            echo '<br>';
+            $displayData .= '<br>';
         }
+        return $displayData;
     }
 }
 
