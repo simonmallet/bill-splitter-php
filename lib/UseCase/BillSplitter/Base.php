@@ -12,13 +12,18 @@ class Base
     /** @var CSVFileReader */
     private $fileReader;
 
+    /** @var DataValidator */
+    public $dataValidator;
+
     /**
      * @param CSVFileReader $fileReader
+     * @param DataValidator $dataValidator
      * @return Base
      */
-    public function __construct(CSVFileReader $fileReader)
+    public function __construct(CSVFileReader $fileReader, DataValidator $dataValidator)
     {   
         $this->fileReader = $fileReader;
+        $this->dataValidator = $dataValidator;
     }
 
     /**

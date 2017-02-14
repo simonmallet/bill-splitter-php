@@ -7,6 +7,7 @@ use \lib\FileSystem\CSVFileReader;
 use \lib\UseCase\BillSplitter;
 use \lib\UseCase\BillSplitter\HeaderExtractor;
 use \lib\UseCase\BillSplitter\Calculator;
+use \lib\UseCase\BillSplitter\DataValidator;
 use \lib\Template\MoneyOweDisplay;
 
 $fileName = 'data/test3-bad-data.txt';
@@ -14,11 +15,18 @@ $fileHandler = new FileHandler();
 $fileHandle = $fileHandler->open($fileName);
 
 $fileReader = new CSVFileReader($fileHandler);
-$headerExtractor = new HeaderExtractor($fileReader);
-$calculator = new Calculator($fileReader);
+$dataValidator = new DataValidator();
+$headerExtractor = new HeaderExtractor($fileReader, $dataValidator);
+$calculator = new Calculator($fileReader, $dataValidator);
 
-$billSplitter = new BillSplitter($fileReader, $headerExtractor, $calculator);
-$splitData = $billSplitter->splitMoneyEqually();
+$billSplitter = new BillSplitter($headerExtractor, $calculator);
+
+try {
+    $splitData = $billSplitter->splitMoneyEqually();
+} catch (\Exception $e) {
+    echo $e->getMessage();
+    die;
+}
 
 $display = new MoneyOweDisplay();
 $display->display($splitData);

@@ -12,6 +12,7 @@ class Calculator extends Base
     {
         $totalPaidOverall = 0;
         while ($row = $this->readLine()) {
+            $this->dataValidator->validateMoneyField($row);
             $position = 0;
             foreach($data as $name => $dataSheet) {
                 $data[$name]['totalPaid'] += $row[$position];

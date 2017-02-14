@@ -1,9 +1,11 @@
 caroline;simon;marika;yohan
+
 15;0;0;0
 
 
 
-abc;25;5;5
-0;0;50;0
+0;25;5
+
+0;d;50
 40;0;0;0
 

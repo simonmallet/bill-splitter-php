@@ -10,6 +10,8 @@ class HeaderExtractor extends Base
     public function getHeaderInformation()
     {
         $row = $this->readLine();
+        $this->dataValidator->validateHeaderFields($row);
+
         foreach ($row as $key => $headerName) {
             $headerNames[$headerName]['totalPaid'] = 0;
         }

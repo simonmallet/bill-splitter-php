@@ -8,9 +8,6 @@ use \lib\UseCase\BillSplitter\Calculator;
 
 class BillSplitter
 {
-    /** @var CSVFileReader */
-    private $fileReader;
-
     /** @var HeaderExtractor */
     private $headerExtractor;
 
@@ -18,15 +15,13 @@ class BillSplitter
     private $calculator;
 
     /**
-     * @param CSVFileReader $fileReader
      * @param HeaderExtractor $headerExtractor
      * @param Calculator @calculator
      *
      * @return BillSplitter
      */
-    public function __construct(CSVFileReader $fileReader, HeaderExtractor $headerExtractor, Calculator $calculator)
+    public function __construct(HeaderExtractor $headerExtractor, Calculator $calculator)
     {
-        $this->fileReader = $fileReader;
         $this->headerExtractor = $headerExtractor;
         $this->calculator = $calculator;
     }
