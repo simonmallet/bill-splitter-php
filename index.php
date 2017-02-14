@@ -12,7 +12,13 @@ use \lib\Template\MoneyOweDisplay;
 
 $fileName = 'data/test1.txt';
 $fileHandler = new FileHandler();
-$fileHandle = $fileHandler->open($fileName);
+
+try {
+    $fileHandle = $fileHandler->open($fileName);
+} catch (\Exception $e) {
+    echo $e->getMessage();
+    die;
+}
 
 $fileReader = new CSVFileReader($fileHandler);
 $dataValidator = new DataValidator();

@@ -11,13 +11,13 @@ class FileHandler
      * @param string $filename
      * @param string $mode
      * @return \Resource
+     * @throws \RuntimeException
      */
     public function open($filename, $mode = 'r')
     {
         $this->resource = @fopen($filename, $mode);
         if (!$this->resource) {
-            echo 'Could not open file: ' . $filename . '. Check your configuration and try again.';
-            die;
+            throw new \RuntimeException("File " . $filename . ' could not be found or is not writable');
         }
         return $this->resource;
     }
