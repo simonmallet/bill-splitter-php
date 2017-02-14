@@ -2,7 +2,6 @@
 
 namespace lib\UseCase;
 
-use \lib\FileSystem\CSVFileReader;
 use \lib\UseCase\BillSplitter\HeaderExtractor;
 use \lib\UseCase\BillSplitter\Calculator;
 
