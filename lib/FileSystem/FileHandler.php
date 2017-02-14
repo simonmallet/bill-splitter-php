@@ -14,7 +14,12 @@ class FileHandler
      */
     public function open($filename, $mode = 'r')
     {
-        return $this->resource = @fopen($filename, $mode);
+        $this->resource = @fopen($filename, $mode);
+        if (!$this->resource) {
+            echo 'Could not open file: ' . $filename . '. Check your configuration and try again.';
+            die;
+        }
+        return $this->resource;
     }
 
     /**

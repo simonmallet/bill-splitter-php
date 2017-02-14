@@ -11,10 +11,7 @@ use \lib\Template\MoneyOweDisplay;
 
 $fileName = 'data/test3-bad-data.txt';
 $fileHandler = new FileHandler();
-
-if (!$fileHandle = $fileHandler->open($fileName)) {
-    echo 'Could not open file: ' . $fileName; die;
-}
+$fileHandle = $fileHandler->open($fileName);
 
 $fileReader = new CSVFileReader($fileHandler);
 $headerExtractor = new HeaderExtractor($fileReader);
