@@ -51,6 +51,7 @@ class Calculator extends Base
      */
     private function getMoneyFrom(array &$data, $giveMoneyTo, $moneyRequired)
     {
+        /** @todo: Reduce complexity */
         if ($moneyRequired >= 0) return;
 
         foreach ($data as $name => $dataSheet) {
